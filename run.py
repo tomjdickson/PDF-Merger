@@ -2,6 +2,13 @@ import os
 from os import listdir
 from os.path import isfile, join
 from PyPDF2 import PdfFileMerger
+import json
+
+# Set config
+with open('config.json') as json_data_file:
+    data = json.load(json_data_file)
+    pagenumber = data["page"]
+    outfile = data["outputFileName"]
 
 # Gets all files in the working directory
 files = [f for f in os.listdir('.') if os.path.isfile(f)]
@@ -15,8 +22,8 @@ merger = PdfFileMerger()
 for pdf in files:
 
     # Meger all files put the second file after page 10
-    merger.merge(10, pdf)
+    merger.merge(pagenumber, pdf)
 
 # Output the file    
-merger.write("result.pdf")
+merger.write(outfile)
 

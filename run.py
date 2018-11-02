@@ -11,9 +11,12 @@ files = filter(lambda f: f.endswith(('.pdf','.PDF')), files)
 
 merger = PdfFileMerger()
 
+# Sets each file in the files array to "pdf"
 for pdf in files:
 
-    merger.append(pdf)
+    # Meger all files put the second file after page 10
+    merger.merge(10, pdf)
 
+# Output the file    
 merger.write("result.pdf")
 
